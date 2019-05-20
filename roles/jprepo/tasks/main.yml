@@ -1,0 +1,11 @@
+---
+- name: リポジトリを日本に差し替え
+  register: jprepo
+  replace:
+    path: /etc/apt/sources.list
+    regexp: "us.archive"
+    replace: "jp.archive"
+- name: リポジトリの更新
+  when: jprepo is changed
+  apt:
+    update_cache: True
